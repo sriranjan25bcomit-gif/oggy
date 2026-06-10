@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Breach Detected</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    color:#00ff00;
+    font-family:Consolas, monospace;
+    overflow:hidden;
+}
+
+.terminal{
+    padding:20px;
+    height:100vh;
+    animation: flicker 0.1s infinite alternate;
+}
+
+.line{
+    margin:5px 0;
+    white-space:nowrap;
+}
+
+.popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#111;
+    border:2px solid red;
+    color:red;
+    padding:30px;
+    width:400px;
+    text-align:center;
+    box-shadow:0 0 30px red;
+    z-index:1000;
+}
+
+.popup h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.popup button{
+    margin-top:15px;
+    padding:10px 20px;
+    background:red;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+@keyframes flicker{
+    from{opacity:1;}
+    to{opacity:0.97;}
+}
+</style>
+</head>
+<body>
+
+<div class="terminal" id="terminal"></div>
+
+<div class="popup">
+    <h1>⚠ YOU ARE HACKED ⚠</h1>
+    <p>Unauthorized access detected.</p>
+    <button onclick="this.parentElement.style.display='none'">
+        CLOSE
+    </button>
+</div>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+const messages = [
+    "[+] Connecting to remote server...",
+    "[+] Bypassing firewall...",
+    "[+] Access granted...",
+    "[+] Downloading encrypted files...",
+    "[+] Scanning system...",
+    "[+] Extracting passwords...",
+    "[+] Root access obtained...",
+    "[+] Uploading payload...",
+    "[+] Accessing secure database...",
+    "[+] System breach detected..."
+];
+
+function addLine(){
+    const line = document.createElement("div");
+    line.className = "line";
+
+    const msg = messages[Math.floor(Math.random()*messages.length)];
+    const randomHex =
+        Math.random().toString(16).substring(2,12).toUpperCase();
+
+    line.textContent = msg + " ID:" + randomHex;
+
+    terminal.appendChild(line);
+
+    if(terminal.children.length > 35){
+        terminal.removeChild(terminal.firstChild);
+    }
+
+    terminal.scrollTop = terminal.scrollHeight;
+}
+
+setInterval(addLine, 120);
+</script>
+
+</body>
+</html>
